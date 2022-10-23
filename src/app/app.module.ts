@@ -59,6 +59,6 @@ registerLocaleData(fr);
     provide: WebsocketConnection,
     useValue: ws
   }, WebSocketTopic],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

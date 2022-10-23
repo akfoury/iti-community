@@ -40,7 +40,11 @@ export class UserService {
     })
   }
 
-  search(token: string): Promise<User[]> {
+  async search(token: string): Promise<User[]> {
     return this.queries.search(token);
+  }
+
+  async exists(username: string): Promise<boolean> {
+    return this.queries.exists(username);
   }
 }

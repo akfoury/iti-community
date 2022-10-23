@@ -1,30 +1,41 @@
 <div class="user-registration">
-  <form nz-form nzLayout="vertical" #f="ngForm" (ngSubmit)="submit()">
+  <form nz-form nzLayout="vertical" #f="ngForm" (ngSubmit)="submit()" passwordMatching>
     <nz-form-item>
       <nz-form-label nzFor="username">Username</nz-form-label>
-      <nz-form-control>
+      <nz-form-control [nzErrorTip]="usernameTpl">
         <input class="ant-input" type="text" name="username" id="username" [(ngModel)]="model.username"
-          #username="ngModel">
+          #username="ngModel" required userNameExists>
       </nz-form-control>
+      <ng-template #usernameTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Le nom d'utilisateur est requis</ng-container>
+        <ng-container *ngIf="control.hasError('exists')">Le nom d'utilisateur n'est pas disponible</ng-container>
+      </ng-template>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label nzFor="password">Mot de passe</nz-form-label>
-      <nz-form-control>
+      <nz-form-control [nzErrorTip]="passwordTpl">
         <input class="ant-input" type="password" name="password" id="password" [(ngModel)]="model.password"
-          #password="ngModel">
+          #password="ngModel" required>
       </nz-form-control>
+      <ng-template #passwordTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Le mot de passe est requis</ng-container>
+      </ng-template>
     </nz-form-item>
 
     <nz-form-item>
       <nz-form-label nzFor="confirm-password">Confirmation du mot de passe</nz-form-label>
-      <nz-form-control>
+      <nz-form-control [nzErrorTip]="confirmPasswordTpl">
         <input class="ant-input" type="password" name="confirm-password" id="confirm-password"
           [(ngModel)]="model.confirmPassword" #confirm="ngModel">
+          <ng-template #confirmPasswordTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">La confirmation du mot de passe est requise</ng-container>
+            <ng-container *ngIf="control.hasError('matching')">Les mots de passe ne correspondent pas</ng-container>
+          </ng-template>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
-        <button class="register-button" nz-button nzType="default" [disabled]="f.form.invalid">S'enregistrer</button>
+        <button class="register-button" nz-button nzType="default" [disabled]="!f.valid">S'enregistrer</button>
       </nz-form-control>
     </nz-form-item>
   </form>

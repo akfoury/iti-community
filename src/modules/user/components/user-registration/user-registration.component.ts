@@ -12,10 +12,10 @@ class UserRegistrationFormModel {
 @Component({
   selector: 'app-user-registration',
   templateUrl: './user-registration.component.html',
-  styleUrls: ['./user-registration.component.less']
+  styleUrls: ['./user-registration.component.less'],
 })
 export class UserRegistrationComponent implements OnInit {
-  @ViewChild("f")
+  @ViewChild('f')
   form: NgForm;
 
   model = new UserRegistrationFormModel();
@@ -29,17 +29,12 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   async submit() {
-
-    // TODO  Vérifier que la confirmation de mot de passe correspond au mot de passe
-    if (this.form.form.invalid || this.model.password !== this.model.confirmPassword) {
-      return;
-    }
-
-    // TODO Enregistrer l'utilisateur via le UserService
-    this.goToLogin();
+    this.userService.register(this.form.controls.username.value, this.form.controls.password.value).then(() => {
+      this.goToLogin();
+    });
   }
 
   goToLogin() {
-    // TODO rediriger l'utilisateur sur "/splash/login"
+    this.router.navigate(['/splash/login']);
   }
 }
