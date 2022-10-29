@@ -36,11 +36,11 @@ import { UserNameExistsValidatorDirective } from 'src/directives/username-exists
     UserStore,
     {
       provide: UserQueries,
-      useClass: LocalUserQueries
+      useClass: HttpUserQueries
     },
     {
       provide: UserCommands,
-      useClass: LocalUserCommands
+      useClass: HttpUserCommands
     }
   ],
   imports: [

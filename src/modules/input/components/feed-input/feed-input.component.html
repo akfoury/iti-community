@@ -11,8 +11,8 @@
       [nzPopoverTrigger]="null" placeholder="Rédigez un nouveau message" [ngModel]="message"
       (ngModelChange)="onMessageChanged($event)"></textarea>
   </form>
-  <button nz-button nzType="primary" (click)="send()" [disabled]="!message && !file">Send</button>
-</div>
+  <button nz-button nzType="primary" type="button" (click)="send()" [disabled]="!message && !file">Send</button>
+</div> 
 <ng-template #contentTemplate>
   <nav class="mentions">
     <a (click)="chooseMention(user)" *ngFor="let user of users">{{user.username}}</a>

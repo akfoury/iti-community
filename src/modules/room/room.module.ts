@@ -20,21 +20,23 @@ import { InputModule } from '../input/input.module';
 import { HttpRoomCommands } from './services/plateform/http/room.commands.http';
 import { HttpRoomQueries } from './services/plateform/http/room.queries.http';
 import { RoomSocketService } from './services/room.socket.service';
+import { RoomLocalStorage } from './services/plateform/local/room.storage';
 
 @NgModule({
   declarations: [RoomMenuComponent, RoomCreateModalComponent, RoomComponent],
   exports: [RoomMenuComponent, RoomComponent],
   providers: [{
     provide: RoomCommands,
-    useClass: LocalRoomCommands
+    useClass: HttpRoomCommands
   },
   {
     provide: RoomQueries,
-    useClass: LocalRoomQueries
+    useClass: HttpRoomQueries
   },
     RoomStore,
     RoomService,
-    RoomSocketService
+    RoomSocketService,
+    RoomLocalStorage
   ],
   imports: [
     CommonModule,

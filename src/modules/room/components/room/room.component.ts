@@ -10,7 +10,11 @@ import { MessageSentEventPayload } from 'src/modules/input/input.model';
   styleUrls: ['./room.component.less']
 })
 export class RoomComponent implements OnInit {
-  constructor(private postService: PostService, private mapper: PostMapper, private store: FeedStore) {
+  constructor(
+    private postService: PostService, 
+    private mapper: PostMapper, 
+    private store: FeedStore
+    ) {
 
   }
 

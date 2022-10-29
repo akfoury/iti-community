@@ -8,17 +8,19 @@ import { PostService } from '../../services/post.service';
   styleUrls: ['./post.component.less']
 })
 export class PostComponent implements OnInit, AfterViewInit {
-  @Input()
-  post: Post;
+  @Input() post: Post;
 
   @ViewChild("anchor")
   anchor: ElementRef<HTMLDivElement>;
 
   constructor(
     private postService: PostService
-  ) { }
+  ) { 
+  }
 
   ngOnInit(): void {
+    console.log('post', this.post);
+    console.log('attachements', this.post.message.attachements);
   }
 
   ngAfterViewInit() {

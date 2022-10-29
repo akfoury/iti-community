@@ -2,21 +2,20 @@
   <form nz-form nzLayout="vertical" #f="ngForm" (submit)="submit()">
     <nz-form-item>
       <nz-form-label nzFor="username">Username</nz-form-label>
-      <nz-form-control>
-        <!--
-          TODO Ajouter l'input pour username avec le data-binding approprié
-          <input class="ant-input" type="text" name="username" id="username" #username="ngModel">
-         -->
-
+      <nz-form-control [nzErrorTip]="usernameTpl">
+          <input class="ant-input" type="text" name="username" id="username" #username="ngModel" [(ngModel)]="model.username" required>
+          <ng-template #usernameTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">Le nom d'utilisateur est requis</ng-container>
+          </ng-template>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label nzFor="password">Mot de passe</nz-form-label>
-      <nz-form-control>
-        <!--
-          TODO Ajouter l'input pour password avec le data-binding approprié
-          <input class="ant-input" type="password" name="password" id="password" #password="ngModel">
-         -->
+      <nz-form-control [nzErrorTip]="passwordTpl">
+          <input class="ant-input" type="password" name="password" id="password" #password="ngModel" [(ngModel)]="model.password" required>
+          <ng-template #passwordTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">Le mot de passe est requis</ng-container>
+          </ng-template>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
