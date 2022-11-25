@@ -14,13 +14,11 @@ export class PostComponent implements OnInit, AfterViewInit {
   anchor: ElementRef<HTMLDivElement>;
 
   constructor(
-    private postService: PostService
-  ) { 
+    private postService: PostService,
+  ) {
   }
 
   ngOnInit(): void {
-    console.log('post', this.post);
-    console.log('attachements', this.post.message.attachements);
   }
 
   ngAfterViewInit() {
@@ -28,6 +26,6 @@ export class PostComponent implements OnInit, AfterViewInit {
   }
 
   async like() {
-    // TODO like du post
+    return await this.postService.like(this.post);
   }
 }

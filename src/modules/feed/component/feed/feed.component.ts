@@ -17,13 +17,21 @@ export class FeedComponent implements OnInit {
 
   posts$: Observable<Post[]>;
 
-  constructor(private postService: PostService, 
-    private store: FeedStore, 
+  constructor(private postService: PostService,
+    private store: FeedStore,
     private socketService: FeedSocketService,
     private userQueries: UserQueries
     ) {
-    this.posts$ = this.store.get(s => s.posts);
     this.roomId$ = this.store.roomId$;
+    this.roomId$.subscribe(value => {
+      if (value) {
+        this.postService.fetch(value, {
+          page: 0,
+          perPage: 10000
+        });
+      }
+    });
+    this.posts$ = this.store.get(s => s.posts);
   }
 
   async ngOnInit() {
@@ -31,7 +39,7 @@ export class FeedComponent implements OnInit {
     this.store.onRoomIdChange(async roomId => {
       if (roomId) {
         this.socketService.onNewPost(roomId, post => {
-          if (post.createdBy.username != currentUser.username) {
+          if (post.createdBy.username !== currentUser.username) {
             this.store.appendPost(post);
           }
         });
@@ -40,6 +48,6 @@ export class FeedComponent implements OnInit {
           perPage: 10000
         });
       }
-    })
+    });
   }
 }

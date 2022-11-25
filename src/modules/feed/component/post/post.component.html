@@ -1,17 +1,16 @@
 <div class="post">
-  <div class="post-author-name"></div>
+  <div class="post-author-name">{{post.createdBy.username}}</div>
 
   <!-- TIPS: [ngStyle]="{'background-image': url(...) }" -->
-  <div class="post-author-photo"></div>
+  <div class="post-author-photo" [ngStyle]="{'background-image': 'url(' + post.createdBy.photoUrl + ')'}"></div>
   <div class="post-date">{{post.createdAt | date}}</div>
 
   <!-- TIPS: [ngClass]="{liked: [expression booléenne]}" -->
-  <div class="post-user-like" [ngClass]="{liked: post.liked}">
+  <div class="post-user-like" [ngClass]="{liked: post.liked}" (click)="like()">
     <i nz-icon nzType="heart" [nzTheme]="post.liked ? 'fill' : 'outline'"></i>
   </div>
 
-  <p class="post-text">
-    {{post.message.text.content}}
+  <p class="post-text" [innerHtml]="post.message.text.content">
   </p>
 
   <!-- Itérer sur les "attachements" du message -->

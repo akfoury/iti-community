@@ -35,20 +35,22 @@ export interface MessageTextElement {
 export interface MessageYoutubeElement {
     type: 'youtube';
     videoId: string;
+    htmlUrl: string;
 }
 
-export interface MessageMediaElement<T extends string> {
+export interface MessageMediaElement<T extends string, E extends string> {
     type: T;
     url: string;
+    htmlUrl: E;
 }
 
-export interface MessageImageElement extends MessageMediaElement<'image'> {
+export interface MessageImageElement extends MessageMediaElement<'image', string> {
 }
 
-export interface MessageVideoElement extends MessageMediaElement<'video'> {
+export interface MessageVideoElement extends MessageMediaElement<'video', string> {
 }
 
-export interface MessageAudioElement extends MessageMediaElement<'audio'> {
+export interface MessageAudioElement extends MessageMediaElement<'audio', string> {
 }
 
 export type MessageElement =

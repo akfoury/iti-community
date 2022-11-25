@@ -15,6 +15,7 @@ export class NotificationService {
 
   async fetch() {
     const notifications = await this.notificationQueries.getNotifications();
+    console.log('notifications', notifications);
     this.store.mutate(s => {
       return {
         ...s,

@@ -29,7 +29,6 @@ export class RoomCreateModalComponent implements OnInit {
 
   async onOk() {
     if (this.form.form.valid) {
-      console.log('name', this.model.name);
       this.roomService.create(this.model.name, this.model.type as RoomType);
       this.close();
     }

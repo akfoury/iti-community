@@ -1,12 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FeedStore } from 'src/modules/feed/feed.store';
 import { Room } from '../../room.model';
-import { RoomStore } from '../../room.store';
 import { RoomLocalStorage } from '../../services/plateform/local/room.storage';
 import { RoomQueries } from '../../services/room.queries';
-import { RoomService } from '../../services/room.service';
 import { RoomSocketService } from '../../services/room.socket.service';
 import { RoomCreateModalComponent } from '../room-create-modal/room-create-modal.component';
 @Component({
@@ -20,7 +18,7 @@ export class RoomMenuComponent implements OnInit {
   @ViewChild('modal') modal: RoomCreateModalComponent;
 
   constructor(
-    private feedStore: FeedStore, 
+    private feedStore: FeedStore,
     private queries: RoomQueries,
     private roomSocketService: RoomSocketService,
     private router: Router,
@@ -32,19 +30,28 @@ export class RoomMenuComponent implements OnInit {
     this.roomSocketService.onNewRoom((room: Room) => {
       this.rooms.push(room);
     });
-    
+
   }
 
   async ngOnInit() {
     this.rooms = await this.queries.getAll();
 
-    // if(!this.roomId$) {
-    //   this.router.navigate([`app/${this.rooms[0].id}`]);
-    // }
+    const storedRoom = this.storage.getValue();
+    if (storedRoom) {
+      this.router.navigate([`app/${storedRoom[0].id}`]);
+    } else if (!this.roomId$) {
+      this.router.navigate([`app/${this.rooms[0].id}`]);
+    } else {
+      this.roomId$.subscribe(roomId => {
+        this.router.navigate([`app/${roomId}`]);
+      });
+    }
+
+
   }
 
   goToRoom(room: Room) {
     this.router.navigate([`app/${room.id}`]);
-    // this.storage.setValue([room]);
+    this.storage.setValue([room]);
   }
 }

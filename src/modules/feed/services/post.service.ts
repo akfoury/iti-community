@@ -9,7 +9,8 @@ import { PostQueries } from './post.queries';
 
 @Injectable()
 export class PostService {
-    constructor(private commands: PostCommands,
+    constructor(
+        private commands: PostCommands,
         private queries: PostQueries,
         private userStore: UserStore,
         private mapper: PostMapper,
@@ -30,7 +31,7 @@ export class PostService {
         });
     }
 
-    like(post: Post) {
-      // TODO appeler la méthode like sur PostCommands
+    async like(post: Post) {
+      return this.commands.like(post.roomId, post.id);
     }
 }

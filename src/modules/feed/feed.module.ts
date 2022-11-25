@@ -19,6 +19,7 @@ import { UserModule } from '../user/user.module';
 import { HttpPostCommands } from './services/plateform/http/post.commands.http';
 import { HttpPostQueries } from './services/plateform/http/post.queries.http';
 import { FeedSocketService } from './services/feed.socket.service';
+import { NotificationSocketService } from '../notification/services/notification.socket.service';
 
 @NgModule({
   declarations: [FeedComponent, PostComponent, PostAttachementImageComponent, PostAttachementVideoComponent, PostAttachementAudioComponent, PostAttachementYoutubeComponent],

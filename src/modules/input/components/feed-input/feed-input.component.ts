@@ -71,6 +71,7 @@ export class FeedInputComponent {
    * @param message
    */
   onMessageChanged(message: string) {
+    console.log('on message changed', message); 
     this.message = message;
   }
 

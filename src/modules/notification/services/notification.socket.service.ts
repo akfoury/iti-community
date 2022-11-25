@@ -33,6 +33,7 @@ export class NotificationSocketService {
     if (this.subscription) {
       this.unsubscribe(this.subscription[0], this.subscription[1]);
     }
+    console.log('in subscribe callback notification');
     const userId = this.authStore.value.userId;
     this.subscribe(userId, callback);
   }

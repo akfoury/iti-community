@@ -8,6 +8,7 @@ export type NotificationSubject =
 
 export interface AppNotification<TSubject extends NotificationSubject, TData extends object> {
   id: string;
+  userId?: string;
   viewedAt?: number;
   timestamp: number;
   subject: TSubject;
@@ -23,7 +24,7 @@ export type PostLikedNotification = AppNotification<'post_liked', {
   user: User;
   postId: string;
   preview: string;
-}>
+}>;
 
 export type NewUserNotification = AppNotification<'new_user', {
   user: User;

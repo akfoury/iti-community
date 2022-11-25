@@ -41,7 +41,7 @@ export class UserProfileForm {
   }
 
   hasChanged(): boolean {
-    return !!this.file || this.username !== this.user.username
+    return !!this.file || this.username !== this.user.username;
   }
 }
 
@@ -69,14 +69,31 @@ export class UserProfileModalComponent implements OnInit {
   }
 
   get photoUrl(): SafeResourceUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.model.photoUrl || "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/434px-Unknown_person.jpg");
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.model.photoUrl || 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/434px-Unknown_person.jpg');
   }
 
   async onOk() {
-    // TODO vérifier si le formulaire est valide
+    if (this.form.form.invalid) {
+      return;
+    }
 
     if (this.model.hasChanged()) {
-      // TODO mettre à jour l'utilisateur via le service
+      const changedObject: {
+        id: string,
+        username?: string,
+        photo?: File
+      } = {id: this.user.id};
+
+      if (this.model.username) {
+        changedObject.username = this.model.username;
+      }
+
+      if (this.model.file) {
+        console.log('in file');
+        changedObject.photo = this.model.file;
+      }
+
+      this.userService.update(changedObject);
     }
 
     this.close();
@@ -97,7 +114,7 @@ export class UserProfileModalComponent implements OnInit {
 
     setTimeout(() => {
       this.form.resetForm(this.model);
-    })
+    });
   }
 
   close() {

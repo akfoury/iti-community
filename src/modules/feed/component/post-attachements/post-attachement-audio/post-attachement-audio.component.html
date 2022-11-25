@@ -1,3 +1,6 @@
 <div class="post-attachement-audio">
-  <!-- Balise audio -->
+  <div [innerHtml]="element.htmlUrl"></div>
+  <audio controls>
+    <source [src]="url">
+  </audio>
 </div>

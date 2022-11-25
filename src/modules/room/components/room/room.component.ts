@@ -3,6 +3,7 @@ import { FeedStore } from 'src/modules/feed/feed.store';
 import { PostMapper } from 'src/modules/feed/services/post.mapper';
 import { PostService } from 'src/modules/feed/services/post.service';
 import { MessageSentEventPayload } from 'src/modules/input/input.model';
+import { NotificationWebService } from 'src/modules/notification/services/notification.web.service';
 
 @Component({
   selector: 'app-room',
@@ -11,11 +12,10 @@ import { MessageSentEventPayload } from 'src/modules/input/input.model';
 })
 export class RoomComponent implements OnInit {
   constructor(
-    private postService: PostService, 
-    private mapper: PostMapper, 
-    private store: FeedStore
-    ) {
-
+    private postService: PostService,
+    private mapper: PostMapper,
+    private store: FeedStore,
+  ) {
   }
 
   ngOnInit(): void {

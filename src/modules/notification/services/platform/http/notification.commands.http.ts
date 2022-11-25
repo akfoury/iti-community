@@ -10,6 +10,6 @@ export class HttpNotificationCommands extends NotificationCommands {
   }
 
   view(): Promise<void> {
-    return this.http.post<void>(`${environment.serverBaseUrl}/notification`, {}).toPromise()
+    return this.http.post<void>(`${environment.serverBaseUrl}/notification`, {}).toPromise();
   }
 }
